@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { useOnboardingStore } from '@/app/onboarding/store'
 
 
 const onboardingPasswordSchema = onboardingSchema.pick({
@@ -19,6 +20,8 @@ export default function OnboardingPasswordForm(){
 
     const router = useRouter()
 
+    const setData = useOnboardingStore((state) => state.setData)
+
     const form = useForm({
         resolver: zodResolver(onboardingPasswordSchema),
         defaultValues: {
@@ -29,6 +32,7 @@ export default function OnboardingPasswordForm(){
 
     const onSubmit = (data) => {
         console.log(data)
+        setData(data)
         router.push("/onboarding/username")
     }
 

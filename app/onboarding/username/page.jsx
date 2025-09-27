@@ -1,3 +1,5 @@
+import OnboardingUsernameForm from "@/components/OnboardingUsernameForm";
+
 export default function OnboardingUsernamePage(){
-    return <div>Username</div>
+    return <OnboardingUsernameForm />
 }

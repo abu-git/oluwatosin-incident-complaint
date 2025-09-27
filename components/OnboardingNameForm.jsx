@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { useOnboardingStore } from '@/app/onboarding/store'
 
 
 const onboardingNameSchema = onboardingSchema.pick({
@@ -18,6 +19,8 @@ const onboardingNameSchema = onboardingSchema.pick({
 function OnboardingNameForm() {
 
     const router = useRouter()
+
+    const setData = useOnboardingStore((state) => state.setData)
 
     const form = useForm({
         resolver: zodResolver(onboardingNameSchema),
@@ -30,6 +33,7 @@ function OnboardingNameForm() {
 
     const onSubmit = (data) => {
         console.log(data)
+        setData(data)
         router.push("/onboarding/password")
     }
 

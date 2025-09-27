@@ -8,4 +8,5 @@ export const onboardingSchema = z.object({
     password: z.string().min(8).max(20),
     repeatPassword: z.string().min(8).max(20),
     terms: z.boolean().refine((data) => data),
+    preferredRole: z.enum(["ENGINEER", "DESIGNER", "PRODUCT_MANAGER"]),
 })
