@@ -64,10 +64,10 @@ function UserDetailsForm() { // Renamed for clarity
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input className='text-white' placeholder="John" {...field} />
+                                <Input className='text-black bg-white' placeholder="John" {...field} />
                             </FormControl>
                             <FormDescription>Your name.</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -80,10 +80,10 @@ function UserDetailsForm() { // Renamed for clarity
                         <FormItem>
                             <FormLabel>Employer ID</FormLabel>
                             <FormControl>
-                                <Input className='text-white' placeholder="574932" {...field} />
+                                <Input className='text-black bg-white' placeholder="574932" {...field} />
                             </FormControl>
                             <FormDescription>Your Employer ID</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -96,10 +96,10 @@ function UserDetailsForm() { // Renamed for clarity
                         <FormItem>
                             <FormLabel>Department</FormLabel>
                             <FormControl>
-                                <Input className='text-white' placeholder="admin" {...field} />
+                                <Input className='text-black bg-white' placeholder="admin" {...field} />
                             </FormControl>
                             <FormDescription>Your Department</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -116,7 +116,7 @@ function UserDetailsForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className="text-black bg-white"> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select your issue" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -136,7 +136,7 @@ function UserDetailsForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident issue
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />

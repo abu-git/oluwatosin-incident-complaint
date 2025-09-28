@@ -65,7 +65,7 @@ function IncidentClassificationForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className='text-black bg-white'> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select Classification" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -78,7 +78,7 @@ function IncidentClassificationForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident classification
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -95,7 +95,7 @@ function IncidentClassificationForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className='text-black bg-white'> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select Priority" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -108,7 +108,7 @@ function IncidentClassificationForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident priority
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />

@@ -67,7 +67,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className='text-black bg-white'> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select Escalation Level" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -79,7 +79,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident escalation level
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                         </FormItem>
                     )}
                 />
@@ -96,7 +96,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className='text-black bg-white'> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select Escalation Status" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -110,7 +110,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident escalation status
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                         </FormItem>
                     )}
                 />
@@ -127,7 +127,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white"> {/* Use the SelectTrigger component */}
+                                    <SelectTrigger className='text-black bg-white'> {/* Use the SelectTrigger component */}
                                         <SelectValue placeholder="Select Resolution Team" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -140,7 +140,7 @@ function IncidentEscalationForm() { // Renamed for clarity
                             <FormDescription>
                                 This is the incident escalation status
                             </FormDescription>
-                            <FormMessage />
+                            <FormMessage className="text-red-500" />
                         </FormItem>
                     )}
                 />

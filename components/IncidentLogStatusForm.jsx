@@ -79,7 +79,7 @@ function IncidentLogStatusForm() {
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white">
+                                    <SelectTrigger className='text-black bg-white'>
                                         <SelectValue placeholder="Select Assigned Team" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -91,7 +91,7 @@ function IncidentLogStatusForm() {
                                 </SelectContent>
                             </Select>
                             <FormDescription>This is the assigned team.</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -105,14 +105,14 @@ function IncidentLogStatusForm() {
                             <FormLabel>Diagnosis Action</FormLabel>
                             <FormControl>
                                 <Textarea
-                                    className='text-white' 
+                                    className='text-black bg-white'
                                     placeholder="Eg. Checked the server logs and identified connection timeout" 
                                     rows={4}
                                     {...field} 
                                 />
                             </FormControl>
                             <FormDescription>This is the diagnosis action taken.</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
@@ -129,7 +129,7 @@ function IncidentLogStatusForm() {
                                 defaultValue={field.value}
                             >
                                 <FormControl>
-                                    <SelectTrigger className="text-white">
+                                    <SelectTrigger className='text-black bg-white'>
                                         <SelectValue placeholder="Select Resolution Status" />
                                     </SelectTrigger>
                                 </FormControl>
@@ -139,7 +139,7 @@ function IncidentLogStatusForm() {
                                 </SelectContent>
                             </Select>
                             <FormDescription>This is the resolution status.</FormDescription>
-                            <FormMessage />
+                            <FormMessage className='text-red-500' />
                         </FormItem>
                     )}
                 />
