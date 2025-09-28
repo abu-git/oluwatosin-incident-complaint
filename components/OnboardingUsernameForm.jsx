@@ -10,6 +10,7 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Checkbox } from './ui/checkbox'
 import { useOnboardingStore } from '@/app/onboarding/store'
+import { useEffect } from 'react'
 
 
 const onboardingUsernameSchema = onboardingSchema.pick({
@@ -48,6 +49,14 @@ export default function OnboardingUsernameForm(){
             preferredRole
         })
     }
+
+    useEffect(() => {
+        if (!useOnboardingStore.persist.hasHydrated()) return
+
+        if(!firstName || !lastName || !password || !repeatPassword || !preferredRole){
+            router.push('/onboarding/name')
+        }
+    }, [useOnboardingStore.persist, firstName, lastName, password, repeatPassword, preferredRole, router])
 
 
     return(

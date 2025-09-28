@@ -9,6 +9,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { useOnboardingStore } from '@/app/onboarding/store'
+import { useEffect } from 'react'
 
 
 const onboardingPasswordSchema = onboardingSchema.pick({
@@ -17,6 +18,10 @@ const onboardingPasswordSchema = onboardingSchema.pick({
 })
 
 export default function OnboardingPasswordForm(){
+
+    const firstName = useOnboardingStore((state) => state.firstName)
+    const lastName = useOnboardingStore((state) => state.lastName)
+    const preferredRole = useOnboardingStore((state) => state.preferredRole)
 
     const router = useRouter()
 
@@ -35,6 +40,14 @@ export default function OnboardingPasswordForm(){
         setData(data)
         router.push("/onboarding/username")
     }
+
+    useEffect(() => {
+        if (!useOnboardingStore.persist.hasHydrated()) return
+
+        if (!firstName || !lastName || !preferredRole) {
+            router.push("/onboarding/name");
+        }
+    }, [ useOnboardingStore.persist, firstName, lastName, preferredRole, router ])
 
     return(
         <Form {...form}>
