@@ -30,6 +30,13 @@ const complaintIssueSchema = complaintSchema.pick({
 });
 
 function IncidentLogStatusForm() {
+
+    const name = useComplaintStore((state) => state.name)
+    const employerId = useComplaintStore((state) => state.employerId)
+    const department = useComplaintStore((state) => state.department)
+    const incident = useComplaintStore((state) => state.incident)
+    const classification = useComplaintStore((state) => state.classification)
+
     const router = useRouter()
     const setData = useComplaintStore((state) => state.setData)
 
@@ -59,6 +66,14 @@ function IncidentLogStatusForm() {
         // If the status is neither 'Resolved' nor 'Escalate', nothing happens, 
         // which might indicate an incomplete selection.
     }
+
+    useEffect(() => {
+        if (!useComplaintStore.persist.hasHydrated()) return
+
+        if(!name || !employerId || !department || !incident || !classification){
+            router.push("/complaint-form/user-details")
+        }
+    }, [useComplaintStore.persist, name, employerId, department, incident, classification])
 
     return (
         <Form {...form}>

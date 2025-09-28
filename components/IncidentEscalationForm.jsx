@@ -2,7 +2,7 @@
 'use client'
 
 import { complaintSchema } from '@/features/complaint/schema'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -30,6 +30,16 @@ const complaintIssueSchema = complaintSchema.pick({
 
 function IncidentEscalationForm() { // Renamed for clarity
 
+    const name = useComplaintStore((state) => state.name)
+    const employerId = useComplaintStore((state) => state.employerId)
+    const department = useComplaintStore((state) => state.department)
+    const incident = useComplaintStore((state) => state.incident)
+    const classification = useComplaintStore((state) => state.classification)
+    const priority = useComplaintStore((state) => state.priority)
+    const assignedTeam = useComplaintStore((state) => state.assignedTeam)
+    const diagnosisAction = useComplaintStore((state) => state.diagnosisAction)
+    const resolutionStatus = useComplaintStore((state) => state.resolutionStatus)
+
     const router = useRouter()
     const setData = useComplaintStore((state) => state.setData)
 
@@ -47,6 +57,14 @@ function IncidentEscalationForm() { // Renamed for clarity
         setData(data)
         router.push("/")
     }
+
+    useEffect(() => {
+        if (!useComplaintStore.persist.hasHydrated()) return
+
+        if(!name || !employerId || !department || !incident || !classification || !priority || !assignedTeam || !diagnosisAction || !!resolutionStatus){
+            router.push("/complaint-form/user-details")
+        }
+    }, [useComplaintStore.persist, name, employerId, department, incident, classification, priority, assignedTeam, diagnosisAction, resolutionStatus])
 
     return (
         <Form {...form}>

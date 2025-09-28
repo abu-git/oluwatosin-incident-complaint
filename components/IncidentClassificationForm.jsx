@@ -2,7 +2,7 @@
 'use client'
 
 import { complaintSchema } from '@/features/complaint/schema'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from "next/navigation"
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -29,6 +29,11 @@ const complaintIssueSchema = complaintSchema.pick({
 
 function IncidentClassificationForm() { // Renamed for clarity
 
+    const name = useComplaintStore((state) => state.name)
+    const employerId = useComplaintStore((state) => state.employerId)
+    const department = useComplaintStore((state) => state.department)
+    const incident = useComplaintStore((state) => state.incident)
+
     const router = useRouter()
     const setData = useComplaintStore((state) => state.setData)
 
@@ -45,6 +50,14 @@ function IncidentClassificationForm() { // Renamed for clarity
         setData(data)
         router.push("/complaint-form/incident-log-status")
     }
+
+    useEffect(() => {
+        if (!useComplaintStore.persist.hasHydrated()) return
+
+        if(!name || !employerId || !department || !incident){
+            router.push("/complaint-form/user-details")
+        }
+    }, [useComplaintStore.persist, name, employerId, department, incident, router])
 
     return (
         <Form {...form}>
