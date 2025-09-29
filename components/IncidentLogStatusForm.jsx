@@ -21,6 +21,11 @@ import { Textarea } from './ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { useComplaintStore } from '@/app/complaint-form/store'
 
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://pkzwdbdsqhrqfmambwhi.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrendkYmRzcWhycWZtYW1id2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxMzExMDAsImV4cCI6MjA3NDcwNzEwMH0.pqT3biIenNUqOIeo3WItbIZ2c2HqQwDbn8-lJqGOmyI'
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 
 // Update the schema to include the new fields
 const complaintIssueSchema = complaintSchema.pick({
@@ -52,18 +57,24 @@ function IncidentLogStatusForm() {
         }
     })
 
-    const onSubmit = (data) => {
+    const onSubmit = async (dataa) => {
         // 1. Log and save data to store
         console.log({
-            ...data,
+            ...dataa,
             name, employerId, department, incident, classification, priority
         })
-        setData(data)
+        setData(dataa)
         
         // 2. Conditional Navigation Logic
-        if (data.resolutionStatus === 'Resolved') {
+        if (dataa.resolutionStatus === 'Resolved') {
+            const { data, error } = await supabase
+            .from('resolved_incident')
+            .insert([
+            { name: name, employer_id: employerId, department: department, incident: incident, classification: classification, priority: priority, assigned_team: dataa.assignedTeam, diagnosis_action: dataa.diagnosisAction, resolution_status: dataa.resolutionStatus },
+            ])
+            .select()
             router.push('/') // Go to home page
-        } else if (data.resolutionStatus === 'Escalate') {
+        } else if (dataa.resolutionStatus === 'Escalate') {
             router.push('/complaint-form/incident-escalation-closure') // Go to escalation page
         }
         
