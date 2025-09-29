@@ -20,6 +20,11 @@ import { Button } from './ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select' // Import Select components
 import { useComplaintStore } from '@/app/complaint-form/store'
 
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://pkzwdbdsqhrqfmambwhi.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrendkYmRzcWhycWZtYW1id2hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxMzExMDAsImV4cCI6MjA3NDcwNzEwMH0.pqT3biIenNUqOIeo3WItbIZ2c2HqQwDbn8-lJqGOmyI'
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 
 // Update the schema to include the new field 'preferredRole'
 const complaintIssueSchema = complaintSchema.pick({
@@ -52,19 +57,38 @@ function IncidentEscalationForm() { // Renamed for clarity
         }
     })
 
-    const onSubmit = (data) => {
-        console.log(data)
-        setData(data)
+    const onSubmit = async (dataa) => {
+        console.log({
+            ...dataa,
+            name,
+            employerId,
+            department,
+            incident,
+            classification,
+            priority,
+            assignedTeam,
+            diagnosisAction,
+            resolutionStatus
+        })
+        setData(dataa)
+
+        const { data, error } = await supabase
+        .from('escalated_incident')
+        .insert([
+        { name: name, employer_id: employerId, department: department, incident: incident, classification: classification, priority: priority, assigned_team: assignedTeam, diagnosis_action: diagnosisAction, resolution_status: resolutionStatus, escalation_level: dataa.escalationLevel, escalation_status: dataa.escalationStatus, resolved_by: dataa.resolvedBy },
+        ])
+        .select()
+
         router.push("/")
     }
 
     useEffect(() => {
         if (!useComplaintStore.persist.hasHydrated()) return
 
-        if(!name || !employerId || !department || !incident || !classification || !priority || !assignedTeam || !diagnosisAction || !!resolutionStatus){
+        if(!name || !employerId || !department || !incident || !classification || !priority || !assignedTeam || !diagnosisAction || !resolutionStatus){
             router.push("/complaint-form/user-details")
         }
-    }, [useComplaintStore.persist, name, employerId, department, incident, classification, priority, assignedTeam, diagnosisAction, resolutionStatus])
+    }, [useComplaintStore.persist, name, employerId, department, incident, classification, priority, assignedTeam, diagnosisAction, resolutionStatus, router])
 
     return (
         <Form {...form}>

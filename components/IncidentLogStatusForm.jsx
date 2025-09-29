@@ -36,6 +36,7 @@ function IncidentLogStatusForm() {
     const department = useComplaintStore((state) => state.department)
     const incident = useComplaintStore((state) => state.incident)
     const classification = useComplaintStore((state) => state.classification)
+    const priority = useComplaintStore((state) => state.priority)
 
     const router = useRouter()
     const setData = useComplaintStore((state) => state.setData)
@@ -53,7 +54,10 @@ function IncidentLogStatusForm() {
 
     const onSubmit = (data) => {
         // 1. Log and save data to store
-        console.log(data)
+        console.log({
+            ...data,
+            name, employerId, department, incident, classification, priority
+        })
         setData(data)
         
         // 2. Conditional Navigation Logic
@@ -70,10 +74,10 @@ function IncidentLogStatusForm() {
     useEffect(() => {
         if (!useComplaintStore.persist.hasHydrated()) return
 
-        if(!name || !employerId || !department || !incident || !classification){
+        if(!name || !employerId || !department || !incident || !classification || !priority){
             router.push("/complaint-form/user-details")
         }
-    }, [useComplaintStore.persist, name, employerId, department, incident, classification])
+    }, [useComplaintStore.persist, name, employerId, department, incident, classification, priority, router])
 
     return (
         <Form {...form}>
